@@ -1,0 +1,17 @@
+{
+	"name": "Fact",
+	"properties": {
+		"content": {
+			"query": "SELECT \nDimorderKey\n,DimCustomerKey\n,DimProductKey\n,DimGeographyKey\n,S.Quantity \n,S.UnitPrice   \n,S.TotalAmount \nFROM silver.silvertable S\nLEFT JOIN \ngold.DimOrders O ON S.OrderID = O.OrderID\nLEFT JOIN \ngold.DimCustomer C ON S.CustomerID = C.CustomerID\nLEFT JOIN \ngold.DimProduct P ON S.ProductID = P.ProductID\nLEFT JOIN \ngold.DimGeography G ON G.RegionID = S.RegionID",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "SalesDWH",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

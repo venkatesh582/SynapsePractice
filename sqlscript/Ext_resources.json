@@ -1,0 +1,17 @@
+{
+	"name": "Ext_resources",
+	"properties": {
+		"content": {
+			"query": "CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'DATAWAREHOUSE@1234'\nCREATE DATABASE SCOPED CREDENTIAL venkat_cred\nWITH IDENTITY = 'Managed Identity'\nCREATE EXTERNAL DATA SOURCE Silver_Source\nWITH \n(\nLOCATION = 'https://strgact0azdw0sub10.dfs.core.windows.net/silver/',\nCREDENTIAL = venkat_cred\n)\nCREATE EXTERNAL DATA SOURCE Gold_Source\nWITH \n(\nLOCATION = 'https://strgact0azdw0sub10.dfs.core.windows.net/gold/',\nCREDENTIAL = venkat_cred\n)\n\nCREATE EXTERNAL FILE FORMAT parquet_format\nWITH \n(\n    FORMAT_TYPE = PARQUET,\n    DATA_COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec'\n)\nCREATE EXTERNAL FILE FORMAT delta\nWITH \n(\n    FORMAT_TYPE = DELTA\n)\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "SalesDWH",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

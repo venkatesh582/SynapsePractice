@@ -1,0 +1,17 @@
+{
+	"name": "SilverTablescript",
+	"properties": {
+		"content": {
+			"query": "IF NOT EXISTS  \n(\nSELECT s.[name] \n,t.Name \n FROM [sys].[schemas] s\n INNER JOIN [sys].[tables] T\n ON S.schema_id = t.schema_id\n Where t.name ='silvertable' and s.name ='silver'\n )\n\nCREATE EXTERNAL TABLE silver.silvertable\n  \n(\nOrderID               Varchar(100)\n,OrderDate             Date\n,CustomerID            Varchar(100)\n,CustomerName          Varchar(100)  \n,CustomerEmail         Varchar(100)\n,ProductID  Varchar(100)\n,ProductName Varchar(100)\n,ProductCategory Varchar(100)\n,RegionID Varchar(100)\n,RegionName Varchar(100)\n,Country Varchar(100)\n,Quantity Int\n,UnitPrice   Int\n,TotalAmount Int\n,Domain  Varchar(100)\n\n)\nWITH\n(\n LOCATION = 'Enriched',\n DATA_SOURCE = Silver_Source,\n FILE_FORMAT = parquet_format\n)\n\n--SELECT * FROM silver.silvertable \n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "SalesDWH",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

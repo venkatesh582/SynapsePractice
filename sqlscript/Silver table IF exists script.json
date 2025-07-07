@@ -1,0 +1,17 @@
+{
+	"name": "Silver table IF exists script",
+	"properties": {
+		"content": {
+			"query": "\nIF NOT EXISTS  \n(\nSELECT s.[name] \n,t.Name \n FROM [sys].[schemas] s\n INNER JOIN [sys].[tables] T\n ON S.schema_id = t.schema_id\n Where t.name ='silvertable' and s.name ='silver'\n )\n\n ",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "SalesDWH",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"name": "DimOrders",
+	"properties": {
+		"content": {
+			"query": "IF NOT EXISTS  \n(\nSELECT s.[name] \n,t.Name \n FROM [sys].[schemas] s\n INNER JOIN [sys].[tables] T\n ON S.schema_id = t.schema_id\n Where t.name ='DimOrders' and s.name ='gold'\n )\n\nCREATE EXTERNAL TABLE gold.DimOrders\n\nWITH\n(\n LOCATION = 'DimOrders',\n DATA_SOURCE = Gold_Source,\n FILE_FORMAT = parquet_format\n)\nAS\nSELECT * ,Row_number() OVER (ORDER BY T.OrderID ) AS DimorderKey FROM \n(\n    SELECT \ndistinct\nOrderID                      \n,CustomerID           \n,CustomerName    \n,CustomerEmail      \n,ProductID \n,ProductName \n,ProductCategory \n,RegionID \n,RegionName \n,Country \n,Domain\n \nFROM silver.silvertable\n)  T\n\n--SELECT * FROM  gold.DimOrders",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "SalesDWH",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

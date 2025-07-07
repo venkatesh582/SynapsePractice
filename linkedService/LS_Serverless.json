@@ -1,0 +1,21 @@
+{
+	"name": "LS_Serverless",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDW",
+		"typeProperties": {
+			"server": "dwsynapsesaivenkatesh-ondemand.sql.azuresynapse.net",
+			"database": "SalesDWH",
+			"encrypt": "optional",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "sqladminuser",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlNZTkFQU0VAOEJENUQ2NTUtMEY1OC00MzlDLUI2MzQtOTBGOUEzN0QyMjk0Xzc0OTgzYWY0LWJhMzYtNDY4OS04ZTU4LWExNjhjMTE3YzAxNiINCn0="
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

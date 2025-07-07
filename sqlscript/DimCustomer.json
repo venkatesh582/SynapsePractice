@@ -1,0 +1,17 @@
+{
+	"name": "DimCustomer",
+	"properties": {
+		"content": {
+			"query": "IF NOT EXISTS  \n(\nSELECT s.[name] \n,t.Name \n FROM [sys].[schemas] s\n INNER JOIN [sys].[tables] T\n ON S.schema_id = t.schema_id\n Where t.name ='DimCustomer' and s.name ='gold'\n )\n\nCREATE EXTERNAL TABLE gold.DimCustomer\n\nWITH\n(\n LOCATION = 'DimCustomer',\n DATA_SOURCE = Gold_Source,\n FILE_FORMAT = parquet_format\n)\nAS\nSELECT * ,Row_number() OVER (ORDER BY T.CustomerID ) AS DimCustomerKey FROM \n(\n    SELECT \ndistinct\nCustomerID\n,CustomerName\n,CustomerEmail \n,Domain \nFROM silver.silvertable\n)  T\n\nSELECT * FROM  gold.DimCustomer",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "SalesDWH",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

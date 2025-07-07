@@ -1,0 +1,17 @@
+{
+	"name": "DimGeography",
+	"properties": {
+		"content": {
+			"query": "IF NOT EXISTS  \n(\nSELECT s.[name] \n,t.Name \n FROM [sys].[schemas] s\n INNER JOIN [sys].[tables] T\n ON S.schema_id = t.schema_id\n Where t.name ='DimGeography' and s.name ='gold'\n )\n\nCREATE EXTERNAL TABLE gold.DimGeography\n\nWITH\n(\n LOCATION = 'DimGeography',\n DATA_SOURCE = Gold_Source,\n FILE_FORMAT = parquet_format\n)\nAS\nSELECT * ,Row_number() OVER (ORDER BY T.RegionID ) AS DimGeographyKey FROM \n(\n    SELECT \ndistinct\nRegionID \n,RegionName\n,Country \n \nFROM silver.silvertable\n)  T\n\n--SELECT * FROM  gold.DimGeography",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "SalesDWH",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
